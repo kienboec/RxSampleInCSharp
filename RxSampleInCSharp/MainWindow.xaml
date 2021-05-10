@@ -1,0 +1,38 @@
+﻿<Window x:Class="RxSampleInCSharp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RxSampleInCSharp"
+        mc:Ignorable="d"
+        Title="Gather Data from sport.orf.at" Height="450" Width="800"
+        d:DataContext="{d:DesignInstance Type=local:DesignMainViewModel, IsDesignTimeCreatable=True}">
+    <Window.DataContext>
+        <local:MainViewModel />
+    </Window.DataContext>
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="5,5,5,0"></Setter>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel >
+            <Button Command="{Binding ClearCommand}" Margin="5,5,5,20">Clear</Button>
+            <Button Command="{Binding GetDataSyncCommand}">Get Data Sync</Button>
+            <Button Command="{Binding GetDataASyncCommand}">Get Data ASync</Button>
+            <Button Command="{Binding GetDataASyncOtherTaskCommand}">Get Data ASync from other Task</Button>
+            <Button Command="{Binding GetDataThreadedCommand}">Get Data ASync from other Thread</Button>
+            <Button Command="{Binding GetDataReactiveCommand}">Get Data Reactive</Button>
+        </StackPanel>
+        <DataGrid Grid.Column="1" ItemsSource="{Binding Data}"
+                  AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Headlines" Binding="{Binding Data}"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>
